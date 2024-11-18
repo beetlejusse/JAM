@@ -7,6 +7,13 @@ const userSchema = new Schema(
             requires: true,
             index: true,
         },
+        email: {
+            type: String,
+            requires: true,
+            unique: true,
+            lowercase: true,
+            trim: true,
+        },
         imageURL: {
             type: String,
             required: true,
