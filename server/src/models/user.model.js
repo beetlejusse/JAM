@@ -12,16 +12,15 @@ const userSchema = new Schema(
             requires: true,
             unique: true,
             lowercase: true,
-            trim: true,
         },
         imageURL: {
             type: String,
-            required: true,
+            required :true
         },
         clerkId: {
             type: String,
             required: true,
-            unique: true,
+            unique: true
         },
     },
     { timestamps: true }
