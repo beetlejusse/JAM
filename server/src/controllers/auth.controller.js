@@ -19,7 +19,7 @@ export const authCallback = async (req, res, next) => {
             // Create new user
             const newUser = new User({
                 clerkId: id,
-                fullName: `${firstName} ${lastName}`.trim(),
+                fullName: `${firstName} ${lastName || ""}`.trim(),
                 imageURL: imageUrl,
                 email
             });
