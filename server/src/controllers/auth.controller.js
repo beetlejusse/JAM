@@ -17,11 +17,11 @@ export const authCallback = async (req, res, next) => {
 
         if (!existingUser) {
             // Create new user
-            const newUser = new User({
+            const newUser = await User.create({
                 clerkId: id,
                 fullName: `${firstName} ${lastName || ""}`.trim(),
                 imageURL: imageUrl,
-                email
+                email,
             });
 
             await newUser.save(); // Save new user to the database
