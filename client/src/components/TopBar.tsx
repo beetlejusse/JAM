@@ -1,4 +1,4 @@
-import {  SignedOut } from "@clerk/clerk-react"
+import {  SignedOut, UserButton } from "@clerk/clerk-react"
 import { LayoutDashboardIcon } from "lucide-react"
 import { Link } from "react-router-dom"
 import { SignInOAuthButton } from "./SignInOAuthButton"
@@ -26,7 +26,7 @@ const TopBar = () => {
                 </Link>
             )}
 
-            
+            <UserButton />
 
             <SignedOut>
                 {/* signin with google */}
