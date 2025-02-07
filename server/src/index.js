@@ -11,12 +11,18 @@ import statsRoutes from "./routes/stats.routes.js";
 import dbConnect from "./lib/db.js";
 import path from "path";
 import cors from "cors";
+import { createServer } from "http";
+import { initializeSocket } from "./lib/Socket.js";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
 const __dirname = path.resolve();
+
+//building socket io server on top of express server
+const httpServer = createServer(app)
+initializeSocket(httpServer)
 
 app.use(
     cors({
@@ -56,7 +62,7 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
     console.log(`Server running on Port ${PORT}`);
     dbConnect();
 });
