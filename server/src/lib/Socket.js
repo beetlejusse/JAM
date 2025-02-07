@@ -5,7 +5,7 @@ export const initializeSocket = (server) => {
     const io = new Server(server, {
         cors: {
             origin: "http://localhost:3000",
-            credentials: true,
+            credentials: true
         },
     });
 
@@ -13,7 +13,7 @@ export const initializeSocket = (server) => {
     const userActivites = new Map(); //{userId: lastActiveTime} to check if the user is active
     io.on("connection", (socket) => {
         //things to do when a user connects
-        socket.on("usr_connected", (userId) => {
+        socket.on("user_connected", (userId) => {
             userSockets.set(userId, socket.id);
             userActivites.set(userId, "Idle");
 
@@ -21,7 +21,7 @@ export const initializeSocket = (server) => {
             //broadcast to all the sockets that the user is connected
             io.emit("user_connected", userId);
 
-            socket.emit("User_online", Array.from(userSockets.keys()));
+            socket.emit("user_online", Array.from(userSockets.keys()));
 
             io.emit("user_activities", Array.from(userActivites.entries()));
         });
@@ -39,7 +39,7 @@ export const initializeSocket = (server) => {
             try {
                 const { senderId, receiverId, content } = data;
 
-                const message = Message.create({
+                const message = await Message.create({
                     senderId,
                     receiverId,
                     content,
@@ -73,7 +73,7 @@ export const initializeSocket = (server) => {
             }
             if(disConnectedUserId){
                 io.emit("user_disconnected", disConnectedUserId);
-                io.emit("user_activities", Array.from(userActivites.entries()));
+                // io.emit("user_activities", Array.from(userActivites.entries()));
             }
         })
     });
