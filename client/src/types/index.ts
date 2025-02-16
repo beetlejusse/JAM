@@ -36,6 +36,7 @@ export interface Message {
 }
 
 export interface User {
+	[x: string]: string;
     _id: string;
     fullName: string;
     clerkId: string;
